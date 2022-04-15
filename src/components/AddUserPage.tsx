@@ -103,12 +103,20 @@ const AddUserPage = () => {
             {...formItemLayout}
             name="name"
             label="Name"
+            
             hasFeedback
-            colon
             rules={[
               {
                 required: true,
                 message: 'Please input your name',
+              },
+              {
+                min: 3,
+                message: 'Name has at least 3 characters!',
+              },
+              {
+                max: 20,
+                message: 'Name has at most 20 characters!'
               },
             ]}
           >
@@ -124,6 +132,14 @@ const AddUserPage = () => {
               {
                 required: true,
                 message: 'Please input your username',
+              },
+              {
+                min: 3,
+                message: 'Username has at least 3 characters!',
+              },
+              {
+                max: 20,
+                message: 'Username has at most 15 characters!'
               },
             ]}
           >

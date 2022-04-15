@@ -109,6 +109,7 @@ const Dashboard: FC<DashboardProp> = (props) => {
     //return user.filter(({ username }) => username === filterInput)
   }*/
 
+
   return (
     <div>
       <Card
@@ -142,9 +143,8 @@ const Dashboard: FC<DashboardProp> = (props) => {
         style={{ border: '3px solid red', margin: '0 0 10px 0' }}
         placeholder="Search by..."
         enterButton="Search"
-        onSearch={setFilterInput}
         allowClear
-      />*/}
+        />*/}
       </Card>
     </div>);
 };
