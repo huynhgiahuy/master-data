@@ -65,7 +65,7 @@ const Dashboard: FC<DashboardProp> = (props) => {
           <DeleteOutlined style={{ fontSize: '20px', color: 'red' }} onClick={() => handleDelete(record.id, record.name)} />
         </Space>
       ),
-    }
+    },
   ];
 
   const openErrorNotification = (placement: NotificationPlacement | undefined, msg: string) => {
@@ -99,16 +99,39 @@ const Dashboard: FC<DashboardProp> = (props) => {
     console.log('params', filters, sorter, extra);
   }
 
-  /*const [filterInput, setFilterInput] = useState('')
+  //Search Table
+  const [filterInput, setFilterInput] = useState('')
   const filterData = () => {
     if (filterInput === '') return user
 
     if (filterInput) {
-      return user.filter(({ name }) => name.includes(filterInput))
+      return user.filter(({ id, name, username, email }) =>
+        name.includes(filterInput)
+        || name.toLocaleLowerCase().includes(filterInput)
+        || name.toLocaleUpperCase().includes(filterInput)
+        ||
+        username.includes(filterInput)
+        || username.toLocaleLowerCase().includes(filterInput)
+        || username.toLocaleUpperCase().includes(filterInput)
+        ||
+        email.includes(filterInput)
+        || email.toLocaleLowerCase().includes(filterInput)
+        || email.toLocaleUpperCase().includes(filterInput)
+        ||
+        id.toString().includes(filterInput)
+        || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
+        || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
+      )
     }
-    //return user.filter(({ username }) => username === filterInput)
-  }*/
+    return user
+  }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterInput(e.target.value)
+    if (e.target.value === '') {
+      return user
+    }
+  }
 
   return (
     <div>
@@ -124,11 +147,20 @@ const Dashboard: FC<DashboardProp> = (props) => {
             >
               Add User
             </Button>
-          </Link>}>
+          </Link>
+        }>
+        <Input.Search
+          style={{ margin: '0 0 10px 0' }}
+          placeholder="Search something..."
+          enterButton
+          allowClear
+          value={filterInput}
+          onSearch={setFilterInput}
+          onChange={handleChange}
+        />
         <Table
           columns={columns}
-          /*dataSource={filterData()}*/
-          dataSource={user}
+          dataSource={filterData()}
           pagination=
           {{
             defaultPageSize: 3,
@@ -139,12 +171,6 @@ const Dashboard: FC<DashboardProp> = (props) => {
           }}
           onChange={onChange} scroll={{ x: 'max-content' }}
         />
-        {/*<Input.Search
-        style={{ border: '3px solid red', margin: '0 0 10px 0' }}
-        placeholder="Search by..."
-        enterButton="Search"
-        allowClear
-        />*/}
       </Card>
     </div>);
 };
