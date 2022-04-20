@@ -33,6 +33,10 @@ const EditUserPage = () => {
 
   console.log(matchUser);
 
+  console.log(matchUser?.address.city)
+
+  const matchUserCity = matchUser?.address.city;
+
   const openSuccessNotification = (placement: NotificationPlacement | undefined) => {
     notification.success({
       message: 'User Edited successfully',
@@ -106,12 +110,12 @@ const EditUserPage = () => {
                     message: 'Please input your name',
                   },
                   {
-                    min: 3,
-                    message: 'Name has at least 3 characters!',
+                    min: 5,
+                    message: 'Name has at least 5 characters!',
                   },
                   {
-                    max: 20,
-                    message: 'Name has at most 20 characters!'
+                    max: 40,
+                    message: 'Name has at most 40 characters!'
                   },
                 ]}
               >
@@ -133,8 +137,8 @@ const EditUserPage = () => {
                     message: 'Username has at least 3 characters!',
                   },
                   {
-                    max: 20,
-                    message: 'Username has at most 15 characters!'
+                    max: 25,
+                    message: 'Username has at most 25 characters!'
                   },
                 ]}
               >

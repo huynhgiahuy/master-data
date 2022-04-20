@@ -1,28 +1,13 @@
-import { Button, Card, Form, Input, notification, Row, Col, Typography } from 'antd';
-import { NotificationPlacement } from 'antd/lib/notification';
-import { useDispatch } from 'react-redux';
+import { Button, Card, Form, Row, Col, Typography } from 'antd';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from '../hooks/useTypedSelector';
-import { userActions } from '../store';
 
 import styles from './AddUserPage.module.css';
 import ErrorPage from './ErrorPage';
 
 const { Text, Paragraph } = Typography;
 
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
-
 const EditUserPage = () => {
-    const dispatch = useDispatch();
     const { loading, error, data } = useSelector(state => state.users);
 
     const { id } = useParams();
@@ -31,53 +16,8 @@ const EditUserPage = () => {
     const [form] = Form.useForm();
 
     const matchUser = data.find(user => user.id === parseInt(id as string));
-    const matchUserID = matchUser?.id;
 
     console.log(matchUser);
-
-    const openSuccessNotification = (placement: NotificationPlacement | undefined) => {
-        notification.success({
-            message: 'User Edited successfully',
-            placement,
-        });
-    };
-
-    const openErrorNotification = (placement: NotificationPlacement | undefined, msg: string) => {
-        notification.error({
-            message: msg,
-            placement,
-        });
-    };
-
-    const onFinish = async (values: any) => {
-        try {
-            console.log('Success:', values);
-
-            const checkEmail = data.find(user => user.email === values.email && user.id !== matchUserID);
-
-            const checkUsername = data.find(user => user.username === values.username && user.id !== matchUserID);
-
-            if (!values.name || !values.email) {
-                return openErrorNotification('topLeft', 'Input Field is empty!');
-            }
-
-            if (checkEmail) {
-                return openErrorNotification('topLeft', 'This email already exists!');
-            }
-
-            if (checkUsername) {
-                return openErrorNotification('topLeft', 'This username already exists!');
-            }
-
-            dispatch(userActions.EditUser(matchUserID as number, values));
-            openSuccessNotification('topRight');
-
-            navigate("/");
-        } catch (errorInfo) {
-            console.log('Failed:', errorInfo);
-            openErrorNotification('topLeft', 'Enter valid values in required fields');
-        }
-    };
 
     const handleBack = () => {
         navigate("/");

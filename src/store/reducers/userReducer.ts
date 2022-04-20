@@ -1,4 +1,4 @@
-import { AddedUser, EditedUser, User } from "../../models/userModel";
+import { AddedUser, Address, EditedUser, User } from "../../models/userModel";
 import { Action } from "../actions";
 import ActionType from "../actions/action-types";
 
@@ -35,8 +35,6 @@ const userReducer = (state: UserState = initialState, action: Action): UserState
 
 export default userReducer;
 
-
-
 // helper functions for Typescript type matching and mocking api types and index
 
 const addUser = ( data: User[], values: AddedUser ): User[] => {
@@ -50,30 +48,30 @@ const addUser = ( data: User[], values: AddedUser ): User[] => {
   }
 
   return [
-  { 
-    id: id, 
-    key: id,
-    name: values.name, 
-    email: values.email,
-    username: username,
-    address: {
-    street: "",
-    suite: "",
-    city: "",
-    zipcode: "",
-    geo: {
-      lat: "",
-      lng: ""
-    }
-    },
-    phone: "",
-    website: "",
-    company: {
-      name: "",
-      catchPhrase: "",
-      bs: ""
-    }
-  }, ...data ]}
+    { 
+      id: id, 
+      key: id,
+      name: values.name, 
+      email: values.email,
+      username: username,
+      address: {
+      street: "",
+      suite: "",
+      city: "",
+      zipcode: "",
+      geo: {
+        lat: "",
+        lng: ""
+      }
+      },
+      phone: "",
+      website: "",
+      company: {
+        name: "",
+        catchPhrase: "",
+        bs: ""
+      }
+    }, ...data ]}
 
 
 const editUser = ( data: User[], id: number, values: EditedUser, ): User[] => data.map(user => ({

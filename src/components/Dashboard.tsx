@@ -86,7 +86,7 @@ const Dashboard: FC<DashboardProp> = (props) => {
         openErrorNotification('topLeft', 'User Deleted');
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
+        }).catch(() => console.log('Errors!'));
       },
       onCancel() {
         console.log('Cancel');
@@ -143,7 +143,12 @@ const Dashboard: FC<DashboardProp> = (props) => {
           <Link to="/add">
             <Button
               type="primary"
-              style={{ borderRadius: '6px', width: '6rem', backgroundColor: 'green', borderColor: 'green' }}
+              style={{
+                borderRadius: '6px',
+                width: '6rem',
+                backgroundColor: 'green',
+                borderColor: 'green'
+              }}
             >
               Add User
             </Button>
@@ -152,7 +157,7 @@ const Dashboard: FC<DashboardProp> = (props) => {
         <Input.Search
           style={{ margin: '0 0 10px 0' }}
           placeholder="Search something..."
-          enterButton
+          enterButton='Search'
           allowClear
           value={filterInput}
           onSearch={setFilterInput}
@@ -166,13 +171,12 @@ const Dashboard: FC<DashboardProp> = (props) => {
             defaultPageSize: 3,
             showSizeChanger: true,
             pageSizeOptions: ['3', '6', '10'],
-            total: user.length,
-            showTotal: total => `Total ${total} users`
           }}
-          onChange={onChange} scroll={{ x: 'max-content' }}
+          onChange={onChange}
         />
       </Card>
-    </div>);
+    </div>
+  );
 };
 
 export default Dashboard;

@@ -1,5 +1,5 @@
 .ant-card-body {
-  padding: 10px;
+  /*padding: 10px;*/
 }
 
 .ant-btn-dangerous {
@@ -9,7 +9,7 @@
 }
 
 .ant-btn {
-  border-radius: 6px !important;
+  /*border-radius: 6px !important;*/
 }
 
 .ant-modal-confirm-confirm .ant-modal-confirm-body > .anticon {

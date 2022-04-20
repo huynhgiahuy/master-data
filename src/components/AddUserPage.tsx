@@ -103,7 +103,6 @@ const AddUserPage = () => {
             {...formItemLayout}
             name="name"
             label="Name"
-            
             hasFeedback
             rules={[
               {
@@ -111,13 +110,18 @@ const AddUserPage = () => {
                 message: 'Please input your name',
               },
               {
-                min: 3,
-                message: 'Name has at least 3 characters!',
+                min: 5,
+                message: 'Name has at least 5 characters!',
               },
               {
-                max: 20,
-                message: 'Name has at most 20 characters!'
+                max: 40,
+                message: 'Name has at most 40 characters!'
               },
+              {
+                type: 'regexp',
+                pattern: new RegExp(/A-Za-z/),
+                message: 'Please input text only',
+              }
             ]}
           >
             <Input placeholder="Please enter your name" />
@@ -138,8 +142,8 @@ const AddUserPage = () => {
                 message: 'Username has at least 3 characters!',
               },
               {
-                max: 20,
-                message: 'Username has at most 15 characters!'
+                max: 25,
+                message: 'Username has at most 25 characters!'
               },
             ]}
           >
