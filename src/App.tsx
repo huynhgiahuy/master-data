@@ -10,7 +10,7 @@ import { Route, Routes } from 'react-router-dom';
 import AddUserPage from './components/AddUserPage';
 import NotFound from './components/NotFound';
 import EditUserPage from './components/EditUserPage';
-import DetailUserPage from './components/UserDetailPage'
+import DetailUserPage from './components/UserDetailPage';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<Dashboard loading={loading} user={data} />} />
         <Route path="/add" element={<AddUserPage />} />
-        <Route path="/detail/:id" element={<DetailUserPage/>}/>
+        <Route path="/detail/:id" element={<DetailUserPage />} />
         <Route path="/edit/:id" element={<EditUserPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

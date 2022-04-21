@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
-import { Button, Card, Modal, notification, Space, Table, Input } from 'antd';
+import { Button, Card, Modal, notification, Space, Table, Input, Popover } from 'antd';
 import "./DashboardAntD.css";
-import { Address, User } from '../models/userModel';
+import { User } from '../models/userModel';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../store';
 import { NotificationPlacement } from 'antd/lib/notification';
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, EyeOutlined, UserAddOutlined } from '@ant-design/icons';
 import styles from './Dashboard.module.css';
 
 interface DashboardProp {
@@ -55,14 +55,20 @@ const Dashboard: FC<DashboardProp> = (props) => {
       key: 'id' || 'delete' || 'detail',
       align: 'center' as 'center',
       render: (record: { id: number; name: string }) => (
-        <Space size='middle'>
+        <Space size='large'>
           <Link to={`detail/${record.id}`}>
-            <EyeOutlined style={{ fontSize: '20px', color: 'blue' }} />
+            <Popover content='Detail'>
+              <EyeOutlined style={{ fontSize: '20px', color: 'blue' }} />
+            </Popover>
           </Link>
           <Link to={`/edit/${record.id}`}>
-            <EditOutlined style={{ fontSize: '20px', color: 'rgb(255 193 6)' }} />
+            <Popover content='Edit'>
+              <EditOutlined style={{ fontSize: '20px', color: 'rgb(255 193 6)' }} />
+            </Popover>
           </Link>
-          <DeleteOutlined style={{ fontSize: '20px', color: 'red' }} onClick={() => handleDelete(record.id, record.name)} />
+          <Popover content='Delete'>
+            <DeleteOutlined style={{ fontSize: '20px', color: 'red' }} onClick={() => handleDelete(record.id, record.name)} />
+          </Popover>
         </Space>
       ),
     },
@@ -106,6 +112,10 @@ const Dashboard: FC<DashboardProp> = (props) => {
 
     if (filterInput) {
       return user.filter(({ id, name, username, email }) =>
+        id.toString().includes(filterInput)
+        || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
+        || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
+        ||
         name.includes(filterInput)
         || name.toLocaleLowerCase().includes(filterInput)
         || name.toLocaleUpperCase().includes(filterInput)
@@ -117,10 +127,6 @@ const Dashboard: FC<DashboardProp> = (props) => {
         email.includes(filterInput)
         || email.toLocaleLowerCase().includes(filterInput)
         || email.toLocaleUpperCase().includes(filterInput)
-        ||
-        id.toString().includes(filterInput)
-        || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
-        || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
       )
     }
     return user
@@ -145,24 +151,27 @@ const Dashboard: FC<DashboardProp> = (props) => {
               type="primary"
               style={{
                 borderRadius: '6px',
-                width: '6rem',
+                width: '8rem',
                 backgroundColor: 'green',
                 borderColor: 'green'
               }}
+              icon={<UserAddOutlined/>}
             >
               Add User
             </Button>
           </Link>
         }>
-        <Input.Search
-          style={{ margin: '0 0 10px 0' }}
-          placeholder="Search something..."
-          enterButton='Search'
-          allowClear
-          value={filterInput}
-          onSearch={setFilterInput}
-          onChange={handleChange}
-        />
+        <Popover content='Search'>
+          <Input.Search
+            style={{ margin: '0 0 10px 0' }}
+            placeholder="Search something..."
+            enterButton='Search'
+            allowClear
+            value={filterInput}
+            onSearch={setFilterInput}
+            onChange={handleChange}
+          />
+        </Popover>
         <Table
           columns={columns}
           dataSource={filterData()}

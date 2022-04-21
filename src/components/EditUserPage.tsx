@@ -35,8 +35,6 @@ const EditUserPage = () => {
 
   console.log(matchUser?.address.city)
 
-  const matchUserCity = matchUser?.address.city;
-
   const openSuccessNotification = (placement: NotificationPlacement | undefined) => {
     notification.success({
       message: 'User Edited successfully',

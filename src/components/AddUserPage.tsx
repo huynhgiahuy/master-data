@@ -18,18 +18,6 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-const formCheckboxLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const AddUserPage = () => {
   const dispatch = useDispatch();
