@@ -5,6 +5,7 @@ import 'antd/dist/antd.min.css';
 
 import App from './App';
 import store from './store/store';
+import './i18n';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,30 +1,31 @@
 import React, { FC, useState } from 'react';
-import { Button, Card, Modal, notification, Space, Table, Input, Popover } from 'antd';
-import "./DashboardAntD.css";
+import { Button, Card, notification, Space, Table, Input, Popover } from 'antd';
 import { User } from '../models/userModel';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../store';
 import { NotificationPlacement } from 'antd/lib/notification';
 import { EditOutlined, DeleteOutlined, EyeOutlined, UserAddOutlined } from '@ant-design/icons';
-import styles from './Dashboard.module.css';
+import styles from '../styles/Dashboard.module.css';
+import { useTranslation } from 'react-i18next';
+import '../styles/DashboardAntD.css';
 
 interface DashboardProp {
   loading: boolean;
   user: User[];
 }
 
-const Dashboard: FC<DashboardProp> = (props) => {
-  const { user, loading } = props;
-  const dispatch = useDispatch();
+const UserPage: FC<DashboardProp> = (props) => {
+  const { user, loading } = props
+  const dispatch = useDispatch()
 
-  console.log(user);
+  console.log(user)
 
-  const { confirm } = Modal;
+  const { t } = useTranslation(["body"])
 
   const columns = [
     {
-      title: 'ID',
+      title: t("tableItems.userId"),
       dataIndex: 'id',
       key: 'id',
       align: 'center' as 'center',
@@ -33,41 +34,41 @@ const Dashboard: FC<DashboardProp> = (props) => {
       },
     },
     {
-      title: 'Name',
+      title: t("tableItems.userName"),
       dataIndex: 'name',
       key: 'name',
       sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.toLocaleString().localeCompare(b.name.toLocaleString())
     },
     {
-      title: 'Username',
+      title: t("tableItems.userUserName"),
       dataIndex: 'username',
       key: 'username',
       sorter: (a: { username: string | any[]; }, b: { username: string | any[]; }) => a.username.toLocaleString().localeCompare(b.username.toLocaleString())
     },
     {
-      title: 'Email',
+      title: t("tableItems.userEmail"),
       dataIndex: 'email',
       key: 'email',
       sorter: (a: { email: string | any[]; }, b: { email: string | any[]; }) => a.email.toLocaleString().localeCompare(b.email.toLocaleString())
     },
     {
-      title: 'Action',
+      title: t("tableItems.userAction"),
       key: 'id' || 'delete' || 'detail',
       align: 'center' as 'center',
-      render: (record: { id: number; name: string }) => (
+      render: (record: { id: number }) => (
         <Space size='large'>
-          <Link to={`detail/${record.id}`}>
-            <Popover content='Detail'>
+          <Link to={`/user/detail/${record.id}`}>
+            <Popover content={t("tableButtons.detailButton")}>
               <EyeOutlined style={{ fontSize: '20px', color: 'blue' }} />
             </Popover>
           </Link>
-          <Link to={`/edit/${record.id}`}>
-            <Popover content='Edit'>
+          <Link /*to={`/user/edit/${record.id}`}*/ to={""}>
+            <Popover content={t("tableButtons.editButton")}>
               <EditOutlined style={{ fontSize: '20px', color: 'rgb(255 193 6)' }} />
             </Popover>
           </Link>
-          <Popover content='Delete'>
-            <DeleteOutlined style={{ fontSize: '20px', color: 'red' }} onClick={() => handleDelete(record.id, record.name)} />
+          <Popover content={t("tableButtons.deleteButton")}>
+            <DeleteOutlined style={{ fontSize: '20px', color: 'red' }} onClick={() => handleDelete(record.id)} />
           </Popover>
         </Space>
       ),
@@ -81,24 +82,9 @@ const Dashboard: FC<DashboardProp> = (props) => {
     });
   };
 
-  const handleDelete = (id: number, name: string) => {
-    confirm({
-      title: 'Delete',
-      content: `Are you sure you want to delete ${name}?`,
-      okText: 'Delete',
-      okType: 'danger',
-      onOk() {
-        dispatch(userActions.DeleteUser(id));
-        openErrorNotification('topLeft', 'User Deleted');
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Errors!'));
-      },
-      onCancel() {
-        console.log('Cancel');
-        openErrorNotification('topLeft', 'Delete Canceled');
-      },
-    });
+  const handleDelete = (id: number) => {
+    dispatch(userActions.DeleteUser(id));
+    openErrorNotification('topRight', t("actionMessages.deleteMessage"));
   }
 
   function onChange(filters: any, sorter: any, extra: any) {
@@ -113,20 +99,20 @@ const Dashboard: FC<DashboardProp> = (props) => {
     if (filterInput) {
       return user.filter(({ id, name, username, email }) =>
         id.toString().includes(filterInput)
-        || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
-        || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
+        || id.toString().toLowerCase().includes(filterInput)
+        || id.toString().toUpperCase().includes(filterInput)
         ||
         name.includes(filterInput)
-        || name.toLocaleLowerCase().includes(filterInput)
-        || name.toLocaleUpperCase().includes(filterInput)
+        || name.toLowerCase().includes(filterInput)
+        || name.toUpperCase().includes(filterInput)
         ||
         username.includes(filterInput)
-        || username.toLocaleLowerCase().includes(filterInput)
-        || username.toLocaleUpperCase().includes(filterInput)
+        || username.toLowerCase().includes(filterInput)
+        || username.toUpperCase().includes(filterInput)
         ||
         email.includes(filterInput)
-        || email.toLocaleLowerCase().includes(filterInput)
-        || email.toLocaleUpperCase().includes(filterInput)
+        || email.toLowerCase().includes(filterInput)
+        || email.toUpperCase().includes(filterInput)
       )
     }
     return user
@@ -144,9 +130,9 @@ const Dashboard: FC<DashboardProp> = (props) => {
       <Card
         className={styles.card}
         loading={loading}
-        title="User List"
+        title={t("tableItems.userList")}
         extra={
-          <Link to="/add">
+          <Link to="/user/add">
             <Button
               type="primary"
               style={{
@@ -155,17 +141,18 @@ const Dashboard: FC<DashboardProp> = (props) => {
                 backgroundColor: 'green',
                 borderColor: 'green'
               }}
-              icon={<UserAddOutlined/>}
+              icon={<UserAddOutlined />}
+              disabled
             >
-              Add User
+              {t("tableButtons.addUserButton")}
             </Button>
           </Link>
         }>
-        <Popover content='Search'>
+        <Popover content={t("tableButtons.searchButton")}>
           <Input.Search
             style={{ margin: '0 0 10px 0' }}
-            placeholder="Search something..."
-            enterButton='Search'
+            placeholder={t("tableButtons.searchButton")}
+            enterButton
             allowClear
             value={filterInput}
             onSearch={setFilterInput}
@@ -175,12 +162,7 @@ const Dashboard: FC<DashboardProp> = (props) => {
         <Table
           columns={columns}
           dataSource={filterData()}
-          pagination=
-          {{
-            defaultPageSize: 3,
-            showSizeChanger: true,
-            pageSizeOptions: ['3', '6', '10'],
-          }}
+          pagination={{ hideOnSinglePage: true }}
           onChange={onChange}
         />
       </Card>
@@ -188,4 +170,4 @@ const Dashboard: FC<DashboardProp> = (props) => {
   );
 };
 
-export default Dashboard;
+export default UserPage;

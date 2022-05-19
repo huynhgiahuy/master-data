@@ -1,0 +1,33 @@
+{
+    "menuItems": {
+        "User": "User",
+        "Post": "Post"
+    },
+    "tableItems": {
+        "userList": "User List",
+        "userDetail": "User Detail",
+        "userId": "U_ID",
+        "userName": "Name",
+        "userUserName": "Username",
+        "userEmail": "Email",
+        "userAction": "Action",
+        "postList": "Post List",
+        "postDetail": "Post Detail",
+        "postId": "P_ID",
+        "postTitle": "Title",
+        "postBody": "Body",
+        "postAction": "Action"
+    },
+    "tableButtons": {
+        "addUserButton": "Add User",
+        "detailButton": "Detail",
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "addPostButton": "Add Post",
+        "searchButton": "Search",
+        "backButton": "Back"
+    },
+    "actionMessages": {
+        "deleteMessage": "Delete successful"
+    }
+}

@@ -1,0 +1,19 @@
+import styled from "styled-components";
+export const StyledDivLogo = styled.div`
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+`;
+
+export const StyledDivHeader = styled.div`
+  height: 60px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-size: 1.2rem;
+  padding-right: 14px;
+  font-family: -apple-system, BlinkMacSystemFont;
+`;

@@ -1,9 +1,8 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-
 import { Action } from "..";
 import { AddedUser, EditedUser, User } from "../../../models/userModel";
-import convertTableData from "../../../util/convertTableData";
+import { convertUserTableData } from "../../../util/convertTableData";
 import ActionType from "../action-types";
 
 const url = "https://jsonplaceholder.typicode.com/users"
@@ -16,11 +15,11 @@ export const getUsers = () => async (dispatch: Dispatch<Action>) => {
 
     const { data } = await axios.get<User[]>(url);
 
-    const convertedData = convertTableData(data);
+    const convertedUserData = convertUserTableData(data);
 
     dispatch({
       type: ActionType.GET_USER_SUCCESS,
-      payload: convertedData,
+      payload: convertedUserData,
     })
   } catch (error: any) {
     dispatch({

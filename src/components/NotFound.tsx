@@ -7,7 +7,7 @@ const NotFound = () => {
       status="404"
       title="Page not found"
       subTitle="Sorry, page not found!"
-      extra={ <Link to="/">  <Button type="primary">  Back to User list </Button> </Link> }
+      extra={ <Link to="/user">  <Button type="primary">  Back to User list </Button> </Link> }
   />
   </div>;
 };

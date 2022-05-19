@@ -1,0 +1,31 @@
+{
+    "User": "Người dùng",
+    "Post": "Bài bình luận",
+    "tableItems": {
+        "userList": "Danh sách người dùng",
+        "userDetail": "Chi tiết người dùng",
+        "userId": "U_ID",
+        "userName": "Tên người dùng",
+        "userUserName": "Tên đăng nhập",
+        "userEmail": "Địa chỉ email",
+        "userAction": "Thao tác",
+        "postList": "Danh sách bài bình luận",
+        "postDetail": "Chi tiết bài bình luận",
+        "postId": "P_ID",
+        "postTitle": "Tiêu đề bài bình luận",
+        "postBody": "Nội dung bài bình luận",
+        "postAction": "Thao tác"
+    },
+    "tableButtons": {
+        "addUserButton": "Thêm user",
+        "detailButton": "Xem chi tiết",
+        "editButton": "Chỉnh sửa",
+        "deleteButton": "Xóa",
+        "addPostButton": "Thêm post",
+        "searchButton": "Tìm kiếm",
+        "backButton": "Quay lại"
+    },
+    "actionMessages": {
+        "deleteMessage": "Xóa thành công"
+    }
+}

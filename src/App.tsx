@@ -1,27 +1,32 @@
-import { FC, useEffect } from 'react';
+import { FC, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-import Dashboard from './components/Dashboard';
+import UserPage from './components/UserPage';
 import { useSelector } from './hooks/useTypedSelector';
-import { userActions } from './store';
+import { userActions, postActions } from './store';
 import styles from "./App.module.css";
 import ErrorPage from './components/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 import AddUserPage from './components/AddUserPage';
 import NotFound from './components/NotFound';
 import EditUserPage from './components/EditUserPage';
-import DetailUserPage from './components/UserDetailPage';
+import UserDetailPage from './components/UserDetailPage';
+import { Layout } from "./layout/index";
+import PostPage from './components/PostPage';
+import PostDetailPage from './components/PostDetailPage';
 
 const App: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(userActions.getUsers());
+    dispatch(postActions.getPosts());
   }, [dispatch]);
 
   const { loading, error, data } = useSelector(state => state.users);
 
-  if (error && data.length === 0) {
+  const { dataPost } = useSelector(state => state.posts);
+
+  if (error && data.length && dataPost.length === 0) {
     return (
       <div className={styles.Error}>
         <ErrorPage error={error} />
@@ -30,15 +35,21 @@ const App: FC = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <Routes>
-        <Route path="/" element={<Dashboard loading={loading} user={data} />} />
-        <Route path="/add" element={<AddUserPage />} />
-        <Route path="/detail/:id" element={<DetailUserPage />} />
-        <Route path="/edit/:id" element={<EditUserPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/user" element={<UserPage loading={loading} user={data} />} />
+            <Route path="/user/add" element={<AddUserPage />} />
+            <Route path="/user/detail/:id" element={<UserDetailPage />} />
+            <Route path="/user/edit/:id" element={<EditUserPage />} />
+            <Route path="/post" element={<PostPage loading={loading} post={dataPost} />} />
+            <Route path="/post/detail/:id" element={<PostDetailPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 

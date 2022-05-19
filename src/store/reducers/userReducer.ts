@@ -11,7 +11,7 @@ interface UserState {
 const initialState = {
   loading: false,
   error: null,
-  data: []
+  data: [],
 }
 
 const userReducer = (state: UserState = initialState, action: Action): UserState => {

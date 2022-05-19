@@ -7,25 +7,25 @@ import { useTranslation } from 'react-i18next';
 
 const { Text, Paragraph } = Typography;
 
-const UserDetailPage = () => {
-    const { loading, error, data } = useSelector(state => state.users);
+const PostDetailPage = () => {
+    const { loading, error, dataPost } = useSelector(state => state.posts);
 
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [form] = Form.useForm();
 
-    const matchUser = data.find(user => user.id === parseInt(id as string));
+    const matchPost = dataPost.find(post => post.id === parseInt(id as string));
 
-    console.log(matchUser);
+    console.log(matchPost);
 
     const { t } = useTranslation(["body"])
 
     const handleBack = () => {
-        navigate("/user");
+        navigate("/post");
     }
 
-    if (error && data.length === 0) {
+    if (error && dataPost.length === 0) {
         return (
             <div className={styles.Error}>
                 <ErrorPage error={error} />
@@ -35,32 +35,32 @@ const UserDetailPage = () => {
 
     return (
         <div>
-            <Card loading={loading} title={t("tableItems.userDetail")} className={styles.card} style={{ textAlign: 'center', justifyContent: 'center' }} >
-                {matchUser ?
+            <Card loading={loading} title={t("tableItems.postDetail")} className={styles.card} style={{ textAlign: 'center', justifyContent: 'center' }} >
+                {matchPost ?
                     (
                         <div>
                             <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
                                 <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userName")}</Text>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.postId")}</Text>
                                 </Col>
-                                <Col md={4} style={{ textAlign: 'right' }}>
-                                    <Paragraph >{matchUser.name}</Paragraph>
-                                </Col>
-                            </Row>
-                            <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
-                                <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userUserName")}</Text>
-                                </Col>
-                                <Col md={4} style={{ textAlign: 'right' }}>
-                                    <Paragraph >{matchUser.username}</Paragraph>
+                                <Col md={15} style={{ textAlign: 'right' }}>
+                                    <Paragraph >{matchPost.id}</Paragraph>
                                 </Col>
                             </Row>
                             <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
                                 <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userEmail")}</Text>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.postTitle")}</Text>
                                 </Col>
-                                <Col md={4} style={{ textAlign: 'right' }}>
-                                    <Paragraph >{matchUser.email}</Paragraph>
+                                <Col md={15} style={{ textAlign: 'right' }}>
+                                    <Paragraph >{matchPost.title}</Paragraph>
+                                </Col>
+                            </Row>
+                            <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
+                                <Col md={2} style={{ textAlign: 'left' }}>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.postBody")}</Text>
+                                </Col>
+                                <Col md={15} style={{ textAlign: 'right' }}>
+                                    <Paragraph >{matchPost.body}</Paragraph>
                                 </Col>
                             </Row>
                             <Button className={styles.cancel} danger onClick={handleBack}>
@@ -70,8 +70,8 @@ const UserDetailPage = () => {
                     ) : (
                         <>
                             <Form form={form} name="dynamic_rule">
-                                <h1>User with ID - {id} does not exist</h1>
-                                <Link to="/user"> <Button style={{ width: '100%' }} type="primary">Back to User List</Button> </Link>
+                                <h1>Post with P_ID - {id} does not exist</h1>
+                                <Link to="/user"> <Button style={{ width: '100%' }} type="primary">Back to Post List</Button> </Link>
                             </Form>
                         </>
                     )
@@ -81,4 +81,4 @@ const UserDetailPage = () => {
     );
 };
 
-export default UserDetailPage;
+export default PostDetailPage;

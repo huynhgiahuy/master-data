@@ -1,4 +1,5 @@
 import { AddedUser, EditedUser, User } from "../../models/userModel";
+import { Post } from "../../models/postModel";
 import ActionType from "./action-types";
 
 interface GetUserRequestAction {
@@ -33,6 +34,25 @@ interface DeleteUser {
   payload: number
 }
 
+interface GetPostRequestAction {
+  type: ActionType.GET_POST_REQUEST;
+}
+
+interface GetPostSuccessAction {
+  type: ActionType.GET_POST_SUCCESS;
+  payload: Post[];
+}
+
+interface GetPostFailAction {
+  type: ActionType.GET_POST_FAIL;
+  payload: string;
+}
+
+interface DeletePost {
+  type: ActionType.DELETE_POST;
+  payload: number;
+}
+
 export type Action = 
   | GetUserRequestAction 
   | GetUserSuccessAction 
@@ -40,3 +60,7 @@ export type Action =
   | AddUser
   | EditUser
   | DeleteUser
+  | GetPostRequestAction
+  | GetPostSuccessAction
+  | GetPostFailAction
+  | DeletePost

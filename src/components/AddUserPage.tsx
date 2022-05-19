@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from '../hooks/useTypedSelector';
 import { userActions } from '../store';
-
-import styles from './AddUserPage.module.css';
+import styles from '../styles/AddUserPage.module.css';
 import ErrorPage from './ErrorPage';
 
 const formItemLayout = {
@@ -64,7 +63,7 @@ const AddUserPage = () => {
       dispatch(userActions.AddUser(values));
       openSuccessNotification('topRight');
 
-      navigate("/");
+      navigate("/user");
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
       openErrorNotification('topLeft', 'Enter valid values in required fields');
@@ -72,7 +71,7 @@ const AddUserPage = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/user");
   }
 
   if (error && data.length === 0) {
