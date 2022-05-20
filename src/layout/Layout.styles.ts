@@ -15,5 +15,4 @@ export const StyledDivHeader = styled.div`
   align-items: center;
   font-size: 1.2rem;
   padding-right: 14px;
-  font-family: -apple-system, BlinkMacSystemFont;
 `;
