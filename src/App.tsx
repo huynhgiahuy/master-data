@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import UserPage from './components/UserPage';
 import { useSelector } from './hooks/useTypedSelector';
 import { userActions, postActions } from './store';
-import styles from "./App.module.css";
+import styles from "./styles/App.module.css";
 import ErrorPage from './components/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
 
