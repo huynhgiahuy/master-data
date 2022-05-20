@@ -1,4 +1,8 @@
 {
+    "projectLanguage": {
+        "en": "Tiếng Anh",
+        "vn": "Tiếng Việt"
+    },
     "User": "Người dùng",
     "Post": "Bài bình luận",
     "tableItems": {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { Action } from "..";
-import { AddedUser, EditedUser, User } from "../../../models/userModel";
+import { User } from "../../../models/userModel";
 import { convertUserTableData } from "../../../util/convertTableData";
 import ActionType from "../action-types";
 
@@ -29,18 +29,6 @@ export const getUsers = () => async (dispatch: Dispatch<Action>) => {
   }
 }
 
-export const AddUser = (values: AddedUser): Action => ({
-  type: ActionType.ADD_USER,
-  payload: values
-})
-
-export const EditUser = (id: number, values: EditedUser): Action => ({
-  type: ActionType.EDIT_USER,
-  payload: {
-    id,
-    values
-  }
-})
 
 export const DeleteUser = (id: number): Action => ({
   type: ActionType.DELETE_USER,

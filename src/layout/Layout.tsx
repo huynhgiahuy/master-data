@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Layout, Menu, Select } from "antd";
+import { Layout, Menu } from "antd";
 import { Outlet, Link } from "react-router-dom";
 import { menuItems } from "../routes/routes.routes";
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,6 @@ import { StyledDivLogo, StyledDivHeader } from "./Layout.styles";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout() {
-
-  const { Option } = Select;
 
   const { i18n, t } = useTranslation(["body"]);
 
@@ -46,16 +44,14 @@ export default function AppLayout() {
         <Header className="site-layout-background" style={{ padding: 0 }}
         >
           <StyledDivHeader>
-
             <select
               value={localStorage.getItem("i18nextLng")!}
               onChange={handleLanguageChange}
             >
-              <option value="en">English</option>
-              <option value="vn">Vietnam</option>
+              <option value="en">{t("projectLanguage.en")}</option>
+              <option value="vn">{t("projectLanguage.vn")}</option>
             </select>
           </StyledDivHeader>
-          {/*<StyledDivHeader>VIETNAM</StyledDivHeader>*/}
         </Header>
         <Content style={{ margin: "0 16px" }}>
           <div

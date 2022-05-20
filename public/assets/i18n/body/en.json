@@ -1,4 +1,8 @@
 {
+    "projectLanguage": {
+        "en": "English",
+        "vn": "Vietnam"
+    },
     "menuItems": {
         "User": "User",
         "Post": "Post"

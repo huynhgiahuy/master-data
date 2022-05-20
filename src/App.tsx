@@ -6,9 +6,9 @@ import { userActions, postActions } from './store';
 import styles from "./App.module.css";
 import ErrorPage from './components/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
-import AddUserPage from './components/AddUserPage';
+
+
 import NotFound from './components/NotFound';
-import EditUserPage from './components/EditUserPage';
 import UserDetailPage from './components/UserDetailPage';
 import { Layout } from "./layout/index";
 import PostPage from './components/PostPage';
@@ -39,10 +39,8 @@ const App: FC = () => {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/user" element={<UserPage loading={loading} user={data} />} />
-            <Route path="/user/add" element={<AddUserPage />} />
+            <Route path="/user" element={<UserPage loading={loading} user={data} />} /> 
             <Route path="/user/detail/:id" element={<UserDetailPage />} />
-            <Route path="/user/edit/:id" element={<EditUserPage />} />
             <Route path="/post" element={<PostPage loading={loading} post={dataPost} />} />
             <Route path="/post/detail/:id" element={<PostDetailPage />} />
             <Route path="*" element={<NotFound />} />

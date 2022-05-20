@@ -1,4 +1,4 @@
-import { AddedUser, EditedUser, User } from "../../models/userModel";
+import { User } from "../../models/userModel";
 import { Action } from "../actions";
 import ActionType from "../actions/action-types";
 
@@ -22,10 +22,7 @@ const userReducer = (state: UserState = initialState, action: Action): UserState
       return { loading: false, error: null, data: action.payload };
     case ActionType.GET_USER_FAIL:
       return { loading: false, error: action.payload, data: [] }
-    case ActionType.ADD_USER:
-      return { loading: false, error: null, data: addUser(state.data, action.payload) }
-    case ActionType.EDIT_USER:
-      return { loading: false, error: null, data: editUser(state.data, action.payload.id, action.payload.values) }
+
     case ActionType.DELETE_USER:
       return { loading: false, error: null, data: deleteUser(state.data, action.payload) }
     default:
@@ -36,45 +33,6 @@ const userReducer = (state: UserState = initialState, action: Action): UserState
 export default userReducer;
 
 // helper functions for Typescript type matching and mocking api types and index
-
-const addUser = (data: User[], values: AddedUser): User[] => {
-  const id = Math.max(0, Math.max(...data.map(({ id }) => id))) + 1;
-
-  return [
-    {
-      id: id,
-      key: id,
-      name: values.name,
-      email: values.email,
-      username: values.username,
-      address: {
-        street: "",
-        suite: "",
-        city: "",
-        zipcode: "",
-        geo: {
-          lat: "",
-          lng: ""
-        }
-      },
-      phone: "",
-      website: "",
-      company: {
-        name: "",
-        catchPhrase: "",
-        bs: ""
-      }
-    }, ...data]
-}
-
-const editUser = (data: User[], id: number, values: EditedUser): User[] => data.map(user => ({
-  ...user,
-  key: user.id === id ? id : user.id,
-  id: user.id === id ? id : user.id,
-  email: user.id === id ? values.email : user.email,
-  name: user.id === id ? values.name : user.name,
-  username: user.id === id ? values.username : user.username
-}))
 
 const deleteUser = (data: User[], id: number): User[] =>
   data.filter((user) => user.id !== id);
