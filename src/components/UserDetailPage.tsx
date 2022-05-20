@@ -34,30 +34,43 @@ const UserDetailPage = () => {
     }
 
     return (
-        <div>
-            <Card loading={loading} title={t("tableItems.userDetail")} className={styles.card} style={{ textAlign: 'center', justifyContent: 'center' }} >
+        <>
+            <Card
+                loading={loading}
+                title={t("tableItems.userDetail")}
+                className={styles.card}
+                style={{ textAlign: 'center', justifyContent: 'center' }}
+            >
                 {matchUser ?
                     (
-                        <div>
+                        <>
                             <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
-                                <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userName")}</Text>
+                                <Col md={4} style={{ textAlign: 'left' }}>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userId")}:</Text>
+                                </Col>
+                                <Col md={4} style={{ textAlign: 'right' }}>
+                                    <Paragraph >{matchUser.id}</Paragraph>
+                                </Col>
+                            </Row>
+                            <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
+                                <Col md={4} style={{ textAlign: 'left' }}>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userName")}:</Text>
                                 </Col>
                                 <Col md={4} style={{ textAlign: 'right' }}>
                                     <Paragraph >{matchUser.name}</Paragraph>
                                 </Col>
                             </Row>
                             <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
-                                <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userUserName")}</Text>
+                                <Col md={4} style={{ textAlign: 'left' }}>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userUserName")}:</Text>
                                 </Col>
                                 <Col md={4} style={{ textAlign: 'right' }}>
                                     <Paragraph >{matchUser.username}</Paragraph>
                                 </Col>
                             </Row>
                             <Row style={{ textAlign: 'center', justifyContent: 'center' }}>
-                                <Col md={2} style={{ textAlign: 'left' }}>
-                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userEmail")}</Text>
+                                <Col md={4} style={{ textAlign: 'left' }}>
+                                    <Text strong style={{ fontSize: 'bold' }}>{t("tableItems.userEmail")}:</Text>
                                 </Col>
                                 <Col md={4} style={{ textAlign: 'right' }}>
                                     <Paragraph >{matchUser.email}</Paragraph>
@@ -66,18 +79,22 @@ const UserDetailPage = () => {
                             <Button className={styles.cancel} danger onClick={handleBack}>
                                 {t("tableButtons.backButton")}
                             </Button>
-                        </div>
+                        </>
                     ) : (
                         <>
                             <Form form={form} name="dynamic_rule">
                                 <h1>User with ID - {id} does not exist</h1>
-                                <Link to="/user"> <Button style={{ width: '100%' }} type="primary">Back to User List</Button> </Link>
+                                <Link
+                                    to="/user"
+                                >
+                                    <Button style={{ width: '100%' }} type="primary">Back to User List</Button>
+                                </Link>
                             </Form>
                         </>
                     )
                 }
             </Card>
-        </div>
+        </>
     );
 };
 

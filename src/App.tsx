@@ -39,7 +39,7 @@ const App: FC = () => {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/user" element={<UserPage loading={loading} user={data} />} /> 
+            <Route path="/user" element={<UserPage loading={loading} user={data} />} />
             <Route path="/user/detail/:id" element={<UserDetailPage />} />
             <Route path="/post" element={<PostPage loading={loading} post={dataPost} />} />
             <Route path="/post/detail/:id" element={<PostDetailPage />} />

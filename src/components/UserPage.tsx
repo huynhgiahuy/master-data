@@ -30,26 +30,30 @@ const UserPage: FC<DashboardProp> = (props) => {
       key: 'id',
       align: 'center' as 'center',
       sorter: {
-        compare: (a: { id: any; }, b: { id: any; }) => a.id - b.id
+        compare: (a: { id: any; }, b: { id: any; }) =>
+          a.id - b.id
       },
     },
     {
       title: t("tableItems.userName"),
       dataIndex: 'name',
       key: 'name',
-      sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.toLocaleString().localeCompare(b.name.toLocaleString())
+      sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) =>
+        a.name.toLocaleString().localeCompare(b.name.toLocaleString())
     },
     {
       title: t("tableItems.userUserName"),
       dataIndex: 'username',
       key: 'username',
-      sorter: (a: { username: string | any[]; }, b: { username: string | any[]; }) => a.username.toLocaleString().localeCompare(b.username.toLocaleString())
+      sorter: (a: { username: string | any[]; }, b: { username: string | any[]; }) =>
+        a.username.toLocaleString().localeCompare(b.username.toLocaleString())
     },
     {
       title: t("tableItems.userEmail"),
       dataIndex: 'email',
       key: 'email',
-      sorter: (a: { email: string | any[]; }, b: { email: string | any[]; }) => a.email.toLocaleString().localeCompare(b.email.toLocaleString())
+      sorter: (a: { email: string | any[]; }, b: { email: string | any[]; }) =>
+        a.email.toLocaleString().localeCompare(b.email.toLocaleString())
     },
     {
       title: t("tableItems.userAction"),
@@ -126,7 +130,7 @@ const UserPage: FC<DashboardProp> = (props) => {
   }
 
   return (
-    <div>
+    <>
       <Card
         className={styles.card}
         loading={loading}
@@ -171,7 +175,7 @@ const UserPage: FC<DashboardProp> = (props) => {
           }}
         />
       </Card>
-    </div>
+    </>
   );
 };
 

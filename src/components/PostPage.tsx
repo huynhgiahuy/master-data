@@ -29,29 +29,23 @@ const PostPage: FC<DashboardProp> = (props) => {
             key: 'id',
             align: 'center' as 'center',
             sorter: {
-                compare: (a: { id: any; }, b: { id: any; }) => a.id - b.id
+                compare: (a: { id: any; }, b: { id: any; }) =>
+                    a.id - b.id
             }
         },
-        /*{
-            title: 'U_ID',
-            dataIndex: 'userId',
-            key: 'userId',
-            align: 'center' as 'center',
-            sorter: {
-                compare: (a: { userId: any; }, b: { userId: any; }) => a.userId - b.userId
-            },
-        },*/
         {
             title: t("tableItems.postTitle"),
             dataIndex: 'title',
             key: 'title',
-            sorter: (a: { title: string | any[]; }, b: { title: string | any[]; }) => a.title.toLocaleString().localeCompare(b.title.toLocaleString())
+            sorter: (a: { title: string | any[]; }, b: { title: string | any[]; }) =>
+                a.title.toLocaleString().localeCompare(b.title.toLocaleString())
         },
         {
             title: t("tableItems.postBody"),
             dataIndex: 'body',
             key: 'body',
-            sorter: (a: { body: string | any[]; }, b: { body: string | any[]; }) => a.body.toLocaleString().localeCompare(b.body.toLocaleString())
+            sorter: (a: { body: string | any[]; }, b: { body: string | any[]; }) =>
+                a.body.toLocaleString().localeCompare(b.body.toLocaleString())
         },
         {
             title: t("tableItems.postAction"),
@@ -128,7 +122,7 @@ const PostPage: FC<DashboardProp> = (props) => {
     }
 
     return (
-        <div>
+        <>
             <Card
                 className={styles.card}
                 loading={loading}
@@ -181,11 +175,10 @@ const PostPage: FC<DashboardProp> = (props) => {
                         triggerAsc: t("tableColumns.sortColumnTooltipAsc"),
                         triggerDesc: t("tableColumns.sortColumnTooltipDsc"),
                         cancelSort: t("tableColumns.sortColumnTooltipCancel"),
-
                     }}
                 />
             </Card>
-        </div>
+        </>
     );
 };
 
