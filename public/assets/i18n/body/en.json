@@ -22,6 +22,11 @@
         "postBody": "Body",
         "postAction": "Action"
     },
+    "tableColumns": {
+        "sortColumnTooltipAsc": "Click to sort ascending",
+        "sortColumnTooltipDsc": "Click to sort descending",
+        "sortColumnTooltipCancel": "Click to cancel sort"
+    },
     "tableButtons": {
         "addUserButton": "Add User",
         "detailButton": "Detail",
@@ -31,7 +36,17 @@
         "searchButton": "Search",
         "backButton": "Back"
     },
+    "tablePaginations": {
+        "itemsPerPage": "/ page",
+        "nextPage": "Next page",
+        "prevPage": "Previous page",
+        "next3Pages": "Next 3 pages",
+        "next5Pages": "Next 5 pages",
+        "prev3Pages": "Previous 3 pages",
+        "prev5Pages": "Previous 5 pages"
+    },
     "actionMessages": {
-        "deleteMessage": "Delete successful"
+        "deleteUserMessage": "Delete user successfully",
+        "deletePostMessage": "Delete post successfully"
     }
 }

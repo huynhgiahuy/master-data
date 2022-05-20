@@ -47,7 +47,7 @@ export default function AppLayout() {
             <select
               value={localStorage.getItem("i18nextLng")!}
               onChange={handleLanguageChange}
-              style={{ backgroundColor: '#001529', color: '#ffffff'}}
+              style={{ backgroundColor: '#001529', color: '#ffffff' }}
             >
               <option value="en">{t("projectLanguage.en")}</option>
               <option value="vn">{t("projectLanguage.vn")}</option>

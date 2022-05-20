@@ -4,7 +4,7 @@
         "vn": "Tiếng Việt"
     },
     "User": "Người dùng",
-    "Post": "Bài bình luận",
+    "Post": "Bình luận",
     "tableItems": {
         "userList": "Danh sách người dùng",
         "userDetail": "Chi tiết người dùng",
@@ -13,11 +13,11 @@
         "userUserName": "Tên đăng nhập",
         "userEmail": "Địa chỉ email",
         "userAction": "Thao tác",
-        "postList": "Danh sách bài bình luận",
-        "postDetail": "Chi tiết bài bình luận",
+        "postList": "Danh sách bình luận",
+        "postDetail": "Chi tiết bình luận",
         "postId": "P_ID",
-        "postTitle": "Tiêu đề bài bình luận",
-        "postBody": "Nội dung bài bình luận",
+        "postTitle": "Tiêu đề bình luận",
+        "postBody": "Nội dung bình luận",
         "postAction": "Thao tác"
     },
     "tableButtons": {
@@ -29,7 +29,22 @@
         "searchButton": "Tìm kiếm",
         "backButton": "Quay lại"
     },
+    "tableColumns": {
+        "sortColumnTooltipAsc": "Nhấn sắp xếp tăng",
+        "sortColumnTooltipDsc": "Nhấn sắp xếp giảm",
+        "sortColumnTooltipCancel": "Nhấn hủy sắp xếp"
+    },
+    "tablePaginations": {
+        "itemsPerPage": "/ trang",
+        "nextPage": "Trang tiếp theo",
+        "prevPage": "Trang trước",
+        "next3Pages": "3 trang sau",
+        "next5Pages": "5 trang sau",
+        "prev3Pages": "3 trang trước",
+        "prev5Pages": "5 trang trước"
+    },
     "actionMessages": {
-        "deleteMessage": "Xóa thành công"
+        "deleteUserMessage": "Xóa người dùng thành công",
+        "deletePostMessage": "Xóa bình luận thành công"
     }
 }

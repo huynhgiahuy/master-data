@@ -30,7 +30,7 @@ const PostPage: FC<DashboardProp> = (props) => {
             align: 'center' as 'center',
             sorter: {
                 compare: (a: { id: any; }, b: { id: any; }) => a.id - b.id
-            },
+            }
         },
         /*{
             title: 'U_ID',
@@ -78,7 +78,7 @@ const PostPage: FC<DashboardProp> = (props) => {
     ];
 
     const openErrorNotification = (placement: NotificationPlacement | undefined, msg: string) => {
-        notification.error({
+        notification.success({
             message: msg,
             placement,
         });
@@ -86,7 +86,7 @@ const PostPage: FC<DashboardProp> = (props) => {
 
     const handleDelete = (id: number) => {
         dispatch(postActions.DeletePost(id));
-        openErrorNotification('topRight', t("actionMessages.deleteMessage"));
+        openErrorNotification('topRight', t("actionMessages.deletePostMessage"));
     }
 
     function onChange(filters: any, sorter: any, extra: any) {
@@ -100,21 +100,21 @@ const PostPage: FC<DashboardProp> = (props) => {
 
         if (filterInput) {
             return post.filter(({ id, userId, title, body }) =>
-                id.toString().includes(filterInput)
-                || id.toString().toLowerCase().includes(filterInput)
-                || id.toString().toUpperCase().includes(filterInput)
+                id.toLocaleString().includes(filterInput)
+                || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
+                || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
                 ||
-                userId.toString().includes(filterInput)
-                || userId.toString().toLowerCase().includes(filterInput)
-                || userId.toString().toUpperCase().includes(filterInput)
+                userId.toLocaleString().includes(filterInput)
+                || userId.toLocaleString().toLocaleLowerCase().includes(filterInput)
+                || userId.toLocaleString().toLocaleUpperCase().includes(filterInput)
                 ||
                 title.includes(filterInput)
-                || title.toLowerCase().includes(filterInput)
-                || title.toUpperCase().includes(filterInput)
+                || title.toLocaleLowerCase().includes(filterInput)
+                || title.toLocaleUpperCase().includes(filterInput)
                 ||
                 body.includes(filterInput)
-                || body.toLowerCase().includes(filterInput)
-                || body.toUpperCase().includes(filterInput)
+                || body.toLocaleLowerCase().includes(filterInput)
+                || body.toLocaleUpperCase().includes(filterInput)
             )
         }
         return post
@@ -164,8 +164,25 @@ const PostPage: FC<DashboardProp> = (props) => {
                 <Table
                     columns={columns}
                     dataSource={filterData()}
-                    pagination={{ hideOnSinglePage: true }}
+                    pagination={{
+                        hideOnSinglePage: true,
+                        locale: {
+                            items_per_page: t("tablePaginations.itemsPerPage"),
+                            next_page: t("tablePaginations.nextPage"),
+                            prev_page: t("tablePaginations.prevPage"),
+                            next_3: t("tablePaginations.next3Pages"),
+                            next_5: t("tablePaginations.next5Pages"),
+                            prev_3: t("tablePaginations.prev3Pages"),
+                            prev_5: t("tablePaginations.prev5Pages")
+                        }
+                    }}
                     onChange={onChange}
+                    locale={{
+                        triggerAsc: t("tableColumns.sortColumnTooltipAsc"),
+                        triggerDesc: t("tableColumns.sortColumnTooltipDsc"),
+                        cancelSort: t("tableColumns.sortColumnTooltipCancel"),
+
+                    }}
                 />
             </Card>
         </div>

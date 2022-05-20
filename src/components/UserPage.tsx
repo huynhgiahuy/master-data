@@ -76,7 +76,7 @@ const UserPage: FC<DashboardProp> = (props) => {
   ];
 
   const openErrorNotification = (placement: NotificationPlacement | undefined, msg: string) => {
-    notification.error({
+    notification.success({
       message: msg,
       placement,
     });
@@ -84,7 +84,7 @@ const UserPage: FC<DashboardProp> = (props) => {
 
   const handleDelete = (id: number) => {
     dispatch(userActions.DeleteUser(id));
-    openErrorNotification('topRight', t("actionMessages.deleteMessage"));
+    openErrorNotification('topRight', t("actionMessages.deleteUserMessage"));
   }
 
   function onChange(filters: any, sorter: any, extra: any) {
@@ -98,21 +98,21 @@ const UserPage: FC<DashboardProp> = (props) => {
 
     if (filterInput) {
       return user.filter(({ id, name, username, email }) =>
-        id.toString().includes(filterInput)
-        || id.toString().toLowerCase().includes(filterInput)
-        || id.toString().toUpperCase().includes(filterInput)
+        id.toLocaleString().includes(filterInput)
+        || id.toLocaleString().toLocaleLowerCase().includes(filterInput)
+        || id.toLocaleString().toLocaleUpperCase().includes(filterInput)
         ||
         name.includes(filterInput)
-        || name.toLowerCase().includes(filterInput)
-        || name.toUpperCase().includes(filterInput)
+        || name.toLocaleLowerCase().includes(filterInput)
+        || name.toLocaleUpperCase().includes(filterInput)
         ||
         username.includes(filterInput)
-        || username.toLowerCase().includes(filterInput)
-        || username.toUpperCase().includes(filterInput)
+        || username.toLocaleLowerCase().includes(filterInput)
+        || username.toLocaleUpperCase().includes(filterInput)
         ||
         email.includes(filterInput)
-        || email.toLowerCase().includes(filterInput)
-        || email.toUpperCase().includes(filterInput)
+        || email.toLocaleLowerCase().includes(filterInput)
+        || email.toLocaleUpperCase().includes(filterInput)
       )
     }
     return user
@@ -164,6 +164,11 @@ const UserPage: FC<DashboardProp> = (props) => {
           dataSource={filterData()}
           pagination={{ hideOnSinglePage: true }}
           onChange={onChange}
+          locale={{
+            triggerAsc: t("tableColumns.sortColumnTooltipAsc"),
+            triggerDesc: t("tableColumns.sortColumnTooltipDsc"),
+            cancelSort: t("tableColumns.sortColumnTooltipCancel")
+          }}
         />
       </Card>
     </div>
