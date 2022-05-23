@@ -16,6 +16,20 @@ interface GetUserFailAction {
   payload: string;
 }
 
+interface GetSearchUserRequestAction {
+  type: ActionType.SEARCH_USER_REQUEST;
+}
+
+interface GetSearchUserSuccessAction {
+  type: ActionType.SEARCH_USER_SUCCESS;
+  payload: User[]
+}
+
+interface GetSearchUserFailAction {
+  type: ActionType.SEARCH_USER_FAIL;
+  payload: string;
+}
+
 interface AddUser {
   type: ActionType.ADD_USER;
   payload: AddedUser
@@ -53,6 +67,34 @@ interface DeletePost {
   payload: number;
 }
 
+interface GetSearchPostRequestAction {
+  type: ActionType.SEARCH_POST_REQUEST;
+}
+
+interface GetSearchPostSuccessAction {
+  type: ActionType.SEARCH_POST_SUCCESS;
+  payload: Post[];
+}
+
+interface GetSearchPostFailAction {
+  type: ActionType.SEARCH_POST_FAIL;
+  payload: string;
+}
+
+interface GetPostPaginationRequestAction {
+  type: ActionType.PAGINATION_POST_REQUEST;
+}
+
+interface GetPostPaginationSuccessAction {
+  type: ActionType.PAGINATION_POST_SUCCESS;
+  payload: Post[]
+}
+
+interface GetPostPaginationFailAction {
+  type: ActionType.PAGINATION_POST_FAIL;
+  payload: string;
+}
+
 export type Action = 
   | GetUserRequestAction 
   | GetUserSuccessAction 
@@ -64,3 +106,12 @@ export type Action =
   | GetPostSuccessAction
   | GetPostFailAction
   | DeletePost
+  | GetSearchUserRequestAction
+  | GetSearchUserSuccessAction
+  | GetSearchUserFailAction
+  | GetSearchPostRequestAction
+  | GetSearchPostSuccessAction
+  | GetSearchPostFailAction
+  | GetPostPaginationRequestAction
+  | GetPostPaginationSuccessAction
+  | GetPostPaginationFailAction

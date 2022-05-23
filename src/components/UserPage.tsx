@@ -96,8 +96,8 @@ const UserPage: FC<DashboardProp> = (props) => {
   }
 
   //Search Table
-  const [filterInput, setFilterInput] = useState('')
-  const filterData = () => {
+  //const [filterInput, setFilterInput] = useState('')
+  /*const filterData = () => {
     if (filterInput === '') return user
 
     if (filterInput) {
@@ -119,14 +119,22 @@ const UserPage: FC<DashboardProp> = (props) => {
         || email.toLocaleUpperCase().includes(filterInput)
       )
     }
+    console.log(filterInput)
     return user
-  }
+  }*/
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterInput(e.target.value)
     if (e.target.value === '') {
       return user
     }
+  }*/
+
+  const [searchInput, setSearchInput] = useState('')
+
+  const handleSearch = () => {
+    dispatch(userActions.SearchUser(searchInput))
+    setSearchInput("")
   }
 
   return (
@@ -152,7 +160,7 @@ const UserPage: FC<DashboardProp> = (props) => {
             </Button>
           </Link>
         }>
-        <Popover content={t("tableButtons.searchButton")}>
+        {/*<Popover content={t("tableButtons.searchButton")}>
           <Input.Search
             style={{ margin: '0 0 10px 0' }}
             placeholder={t("tableButtons.searchButton")}
@@ -162,10 +170,31 @@ const UserPage: FC<DashboardProp> = (props) => {
             onSearch={setFilterInput}
             onChange={handleChange}
           />
+        </Popover>*/}
+        {/*<form onSubmit={handleSearch}>
+          <input
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search"
+            autoFocus
+          />
+          <button type="submit">Search</button>
+      </form>*/}
+        <Popover content={t("tableButtons.searchButton")}>
+          <Input.Search
+            style={{ margin: '0 0 10px 0' }}
+            placeholder={t("tableButtons.searchButton")}
+            enterButton
+            allowClear
+            value={searchInput}
+            onSearch={handleSearch}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
         </Popover>
         <Table
           columns={columns}
-          dataSource={filterData()}
+          //dataSource={filterData()}
+          dataSource={user}
           pagination={{ hideOnSinglePage: true }}
           onChange={onChange}
           locale={{

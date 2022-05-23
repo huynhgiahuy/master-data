@@ -84,11 +84,12 @@ const PostPage: FC<DashboardProp> = (props) => {
     }
 
     function onChange(filters: any, sorter: any, extra: any) {
-        console.log('params', filters, sorter, extra);
+        console.log('params', filters);
+        dispatch(postActions.PaginationPosts(filters.current * filters.pageSize - filters.pageSize, filters.pageSize))
     }
 
     //Search Table
-    const [filterInput, setFilterInput] = useState('')
+    /*const [filterInput, setFilterInput] = useState('')
     const filterData = () => {
         if (filterInput === '') return post
 
@@ -119,6 +120,13 @@ const PostPage: FC<DashboardProp> = (props) => {
         if (e.target.value === '') {
             return post
         }
+    }*/
+
+    const [searchInput, setSearchInput] = useState('')
+
+    const handleSearch = () => {
+        dispatch(postActions.SearchPost(searchInput))
+        setSearchInput("")
     }
 
     return (
@@ -150,16 +158,15 @@ const PostPage: FC<DashboardProp> = (props) => {
                         placeholder={t("tableButtons.searchButton")}
                         enterButton
                         allowClear
-                        value={filterInput}
-                        onSearch={setFilterInput}
-                        onChange={handleChange}
+                        value={searchInput}
+                        onSearch={handleSearch}
+                        onChange={(e) => setSearchInput(e.target.value)}
                     />
                 </Popover>
                 <Table
                     columns={columns}
-                    dataSource={filterData()}
+                    dataSource={post}
                     pagination={{
-                        hideOnSinglePage: true,
                         locale: {
                             items_per_page: t("tablePaginations.itemsPerPage"),
                             next_page: t("tablePaginations.nextPage"),
@@ -168,7 +175,7 @@ const PostPage: FC<DashboardProp> = (props) => {
                             next_5: t("tablePaginations.next5Pages"),
                             prev_3: t("tablePaginations.prev3Pages"),
                             prev_5: t("tablePaginations.prev5Pages")
-                        }
+                        },
                     }}
                     onChange={onChange}
                     locale={{
